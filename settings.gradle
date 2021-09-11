@@ -1,0 +1,3 @@
+rootProject.name = "FileParsersToolbox"
+include ':app'
+include ':FileParsersToolboxAndroidLib'
