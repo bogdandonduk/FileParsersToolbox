@@ -28,11 +28,11 @@ object BookUtils {
                     is TitleTextContentItem ->
                         try {
                             last().let { lastItem ->
-                                if(lastItem is TextContentItem) {
+                                if(lastItem is TextContentItem)
                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${it.text}").apply {
-                                        setSpan(AbsoluteSizeSpan(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it.textSize.toFloat(), context.resources.displayMetrics).toInt()), length - it.text.length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                        setSpan(AbsoluteSizeSpan(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, it.textSize.toFloat(), context.resources.displayMetrics).toInt()), length - it.text.length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                     }
-                                } else
+                                else
                                     add(it)
                             }
                         } catch(thr: Throwable) {
@@ -42,11 +42,11 @@ object BookUtils {
                     is TextContentItem -> {
                         try {
                             last().let { lastItem ->
-                                if(lastItem is TextContentItem) {
+                                if(lastItem is TextContentItem)
                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${it.text}").apply {
-                                        setSpan(AbsoluteSizeSpan(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it.textSize.toFloat(), context.resources.displayMetrics).toInt()).dip, length - it.text.length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                        setSpan(AbsoluteSizeSpan(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, it.textSize.toFloat(), context.resources.displayMetrics).toInt()).dip, length - it.text.length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                     }
-                                } else
+                                else
                                     add(it)
                             }
                         } catch(thr: Throwable) {
