@@ -144,7 +144,7 @@ object EpubUtils {
                                             last().let { lastItem ->
                                                 if(lastItem is TextContentItem)
                                                     if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
+                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}")
                                                     else
                                                         add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                             }
@@ -240,7 +240,7 @@ object EpubUtils {
                                             last().let { lastItem ->
                                                 if(lastItem is TextContentItem)
                                                     if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
+                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}").apply {
                                                             setSpan(StyleSpan(Typeface.ITALIC), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                         }
                                                     else
