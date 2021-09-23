@@ -141,110 +141,112 @@ object EpubUtils {
                                 when(element.tagName().lowercase()) {
                                     "p" ->
                                         try {
-                                            last().let { lastItem ->
-                                                if(lastItem is TextContentItem)
-                                                    if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}")
-                                                    else
-                                                        add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
-                                            }
+                                            val lastItem = last()
+
+                                            if(lastItem is TextContentItem) {
+                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}")
+                                            } else
+                                                add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
                                             add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h1" ->
                                         try {
-                                            last().let { lastItem ->
-                                                if(lastItem is TextContentItem)
-                                                    if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
-                                                            setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                                                        }
-                                                else
-                                                    add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
-                                            }
+                                            val lastItem = last()
+
+                                            if(lastItem is TextContentItem) {
+                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
+                                            } else
+                                                add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h2" ->
                                         try {
-                                            last().let { lastItem ->
-                                                if(lastItem is TextContentItem)
-                                                    if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
-                                                            setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                                                        }
-                                                    else
-                                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
-                                            }
+                                            val lastItem = last()
+
+                                            if(lastItem is TextContentItem) {
+                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
+                                            } else
+                                                add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h3" ->
                                         try {
-                                            last().let { lastItem ->
-                                                if(lastItem is TextContentItem)
-                                                    if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
-                                                            setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                                                        }
-                                                    else
-                                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H3, isChapterTitle = tocTitles.contains(element.text())))
-                                            }
+                                            val lastItem = last()
+
+                                            if(lastItem is TextContentItem) {
+                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
+                                            } else
+                                                add(TitleTextContentItem(element.text(), TitleTextLevel.H3, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H3, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h4" ->
                                         try {
-                                            last().let { lastItem ->
-                                                if(lastItem is TextContentItem)
-                                                    if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
-                                                            setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                                                        }
-                                                    else
-                                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
-                                            }
+                                            val lastItem = last()
+
+                                            if(lastItem is TextContentItem) {
+                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
+                                            } else
+                                                add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h5" ->
                                         try {
-                                            last().let { lastItem ->
-                                                if(lastItem is TextContentItem)
-                                                    if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
-                                                            setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                                                        }
-                                                    else
-                                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
-                                            }
+                                            val lastItem = last()
+
+                                            if(lastItem is TextContentItem) {
+                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
+                                            } else
+                                                add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h6" ->
                                         try {
-                                            last().let { lastItem ->
-                                                if(lastItem is TextContentItem)
-                                                    if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
-                                                            setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                                                        }
-                                                    else
-                                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
-                                            }
+                                            val lastItem = last()
+
+                                            if(lastItem is TextContentItem) {
+                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
+                                            } else
+                                                add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
                                         }
+
                                     "em" ->
                                         try {
-                                            last().let { lastItem ->
-                                                if(lastItem is TextContentItem)
-                                                    if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                        lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}").apply {
-                                                            setSpan(StyleSpan(Typeface.ITALIC), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                                                        }
-                                                    else
-                                                        add(TextContentItem(element.text(), 18, Typeface.ITALIC))                                            }
+                                            val lastItem = last()
+
+                                            if(lastItem is TextContentItem) {
+                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}").apply {
+                                                        setSpan(StyleSpan(Typeface.ITALIC), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
+                                            } else
+                                                add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         } catch(thr: Throwable) {
                                             add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         }
