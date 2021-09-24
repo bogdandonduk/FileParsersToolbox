@@ -152,7 +152,8 @@ object EpubUtils {
                                                 add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                             }
                                         } catch(thr: Throwable) {
-                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMergeException" + thr.message)
+                                            thr.printStackTrace()
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -170,7 +171,8 @@ object EpubUtils {
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
                                             }
                                         } catch(thr: Throwable) {
-                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMergeException" + thr.message)
+                                            thr.printStackTrace()
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -188,7 +190,8 @@ object EpubUtils {
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
                                             }
                                         } catch(thr: Throwable) {
-                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMergeException" + thr.message)
+                                            thr.printStackTrace()
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -206,7 +209,8 @@ object EpubUtils {
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H3, isChapterTitle = tocTitles.contains(element.text())))
                                             }
                                         } catch(thr: Throwable) {
-                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMergeException" + thr.message)
+                                            thr.printStackTrace()
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H3, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -224,7 +228,8 @@ object EpubUtils {
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
                                             }
                                         } catch(thr: Throwable) {
-                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMergeException" + thr.message)
+                                            thr.printStackTrace()
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -242,7 +247,8 @@ object EpubUtils {
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
                                             }
                                         } catch(thr: Throwable) {
-                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMergeException" + thr.message)
+                                            thr.printStackTrace()
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -260,7 +266,8 @@ object EpubUtils {
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
                                             }
                                         } catch(thr: Throwable) {
-                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMergeException" + thr.message)
+                                            thr.printStackTrace()
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -280,7 +287,8 @@ object EpubUtils {
                                             }
 
                                         } catch(thr: Throwable) {
-                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMergeException" + thr.message)
+                                            thr.printStackTrace()
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         }
