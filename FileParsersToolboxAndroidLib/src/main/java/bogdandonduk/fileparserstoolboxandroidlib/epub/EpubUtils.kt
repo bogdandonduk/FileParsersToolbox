@@ -147,9 +147,12 @@ object EpubUtils {
                                             if(lastItem is TextContentItem) {
                                                 if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}")
-                                            } else
+                                            } else {
+                                                Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
                                                 add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
+                                            }
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", thr.message ?: "NULL Message")
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -162,9 +165,12 @@ object EpubUtils {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
                                                         setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                     }
-                                            } else
+                                            } else {
+                                                Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
+                                            }
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", thr.message ?: "NULL Message")
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -177,9 +183,12 @@ object EpubUtils {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
                                                         setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                     }
-                                            } else
+                                            } else {
+                                                Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
+                                            }
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", thr.message ?: "NULL Message")
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -192,9 +201,13 @@ object EpubUtils {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
                                                         setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                     }
-                                            } else
+                                            } else {
+                                                Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H3, isChapterTitle = tocTitles.contains(element.text())))
+                                            }
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H3, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h4" ->
@@ -206,9 +219,12 @@ object EpubUtils {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
                                                         setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                     }
-                                            } else
+                                            } else {
+                                                Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
+                                            }
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", thr.message ?: "NULL Message")
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -221,9 +237,12 @@ object EpubUtils {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
                                                         setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                     }
-                                            } else
+                                            } else {
+                                                Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
+                                            }
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", thr.message ?: "NULL Message")
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
                                         }
@@ -236,9 +255,13 @@ object EpubUtils {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}").apply {
                                                         setSpan(StyleSpan(Typeface.BOLD), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                     }
-                                            } else
+                                            } else {
+                                                Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
+                                            }
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", thr.message ?: "NULL Message")
+                                            Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
                                         }
 
@@ -251,9 +274,13 @@ object EpubUtils {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}").apply {
                                                         setSpan(StyleSpan(Typeface.ITALIC), length - element.text().length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                     }
-                                            } else
+                                            } else {
+                                                Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
                                                 add(TextContentItem(element.text(), 18, Typeface.ITALIC))
+                                            }
+
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", thr.message ?: "NULL Message")
                                             Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         }
