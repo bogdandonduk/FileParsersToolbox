@@ -4,6 +4,7 @@ import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.StyleSpan
+import android.util.Log
 import bogdandonduk.fileparserstoolboxandroidlib.core.*
 import bogdandonduk.fileparserstoolboxandroidlib.core.books.Book
 import nl.siegmann.epublib.epub.EpubReader
@@ -149,6 +150,7 @@ object EpubUtils {
                                             } else
                                                 add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h1" ->
@@ -163,6 +165,7 @@ object EpubUtils {
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h2" ->
@@ -177,6 +180,7 @@ object EpubUtils {
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h3" ->
@@ -205,6 +209,7 @@ object EpubUtils {
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h5" ->
@@ -219,6 +224,7 @@ object EpubUtils {
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
                                         }
                                     "h6" ->
@@ -248,6 +254,7 @@ object EpubUtils {
                                             } else
                                                 add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         } catch(thr: Throwable) {
+                                            Log.d("TAG", "parseAndMerge: ${element.text()}")
                                             add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         }
                                 }
