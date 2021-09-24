@@ -166,7 +166,7 @@ object EpubUtils {
                                                 if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length)) {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
 
-                                                    (lastItem.text as SpannableString).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    (lastItem.text as SpannableStringBuilder).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                 }
                                             } else {
                                                 Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
@@ -185,8 +185,7 @@ object EpubUtils {
                                             if(lastItem is TextContentItem) {
                                                 if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length)) {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
-
-                                                    (lastItem.text as SpannableString).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    (lastItem.text as SpannableStringBuilder).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                 }
                                             } else {
                                                 Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
@@ -205,7 +204,7 @@ object EpubUtils {
                                             if(lastItem is TextContentItem) {
                                                 if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length)) {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
-                                                    (lastItem.text as SpannableString).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    (lastItem.text as SpannableStringBuilder).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                 }
                                             } else {
                                                 Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
@@ -224,7 +223,7 @@ object EpubUtils {
                                             if(lastItem is TextContentItem) {
                                                 if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length)) {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
-                                                    (lastItem.text as SpannableString).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    (lastItem.text as SpannableStringBuilder).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                 }
                                             } else {
                                                 Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
@@ -243,7 +242,7 @@ object EpubUtils {
                                             if(lastItem is TextContentItem) {
                                                 if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length)) {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
-                                                    (lastItem.text as SpannableString).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    (lastItem.text as SpannableStringBuilder).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                 }
                                             } else {
                                                 Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
@@ -262,7 +261,7 @@ object EpubUtils {
                                             if(lastItem is TextContentItem) {
                                                 if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length)) {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
-                                                    (lastItem.text as SpannableString).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    (lastItem.text as SpannableStringBuilder).setSpan(StyleSpan(Typeface.BOLD), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                 }
                                             } else {
                                                 Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
@@ -283,7 +282,7 @@ object EpubUtils {
                                                 if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length)) {
                                                     lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}")
 
-                                                    (lastItem.text as SpannableString).setSpan(StyleSpan(Typeface.ITALIC), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    (lastItem.text as SpannableStringBuilder).setSpan(StyleSpan(Typeface.ITALIC), lastItem.text.length - element.text().length, lastItem.text.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                 }
                                             } else {
                                                 Log.d("TAG", "parseAndMerge: ELSE ${element.text()}")
