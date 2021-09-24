@@ -16,7 +16,7 @@ object BookUtils {
     fun validate(book: Book) = !(book.title == null && book.contents == null)
 
     @Deprecated("Using native EpubUtils#parseAndMerge and Fb2Utils#getValidMerged methods is more efficient than using this one")
-    fun mergeContents(context: Context, book: Book?, inlineCoverImage: Boolean = true, inlineTitle: Boolean = true) = book?.apply {
+    fun mergeContents(book: Book?, inlineCoverImage: Boolean = true, inlineTitle: Boolean = true) = book?.apply {
         book.contents = mutableListOf<ContentItem>().apply {
             if(inlineCoverImage && !book.coverImageInlined && book.coverImage != null)
                 add(book.coverImage!!)
