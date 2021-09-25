@@ -146,8 +146,8 @@ object EpubUtils {
                                             val lastItem = last()
 
                                             if(lastItem is TextContentItem) {
-                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}")
+                                                if(element.text().isNotEmpty())
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("${element.text()}$lineSeparator")
                                             } else
                                                 add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
@@ -158,8 +158,10 @@ object EpubUtils {
                                             val lastItem = last()
 
                                             if(lastItem is TextContentItem) {
-                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
+                                                if(element.text().isNotEmpty())
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}$lineSeparator").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), lastIndexOf(element.text()), length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
@@ -170,8 +172,10 @@ object EpubUtils {
                                             val lastItem = last()
 
                                             if(lastItem is TextContentItem) {
-                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
+                                                if(element.text().isNotEmpty())
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}$lineSeparator").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), lastIndexOf(element.text()), length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
@@ -182,8 +186,10 @@ object EpubUtils {
                                             val lastItem = last()
 
                                             if(lastItem is TextContentItem) {
-                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
+                                                if(element.text().isNotEmpty())
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}$lineSeparator").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), lastIndexOf(element.text()), length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H3, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
@@ -194,8 +200,10 @@ object EpubUtils {
                                             val lastItem = last()
 
                                             if(lastItem is TextContentItem) {
-                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
+                                                if(element.text().isNotEmpty())
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}$lineSeparator").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), lastIndexOf(element.text()), length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
@@ -206,8 +214,10 @@ object EpubUtils {
                                             val lastItem = last()
 
                                             if(lastItem is TextContentItem) {
-                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
+                                                if(element.text().isNotEmpty())
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}$lineSeparator").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), lastIndexOf(element.text()), length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
@@ -218,22 +228,24 @@ object EpubUtils {
                                             val lastItem = last()
 
                                             if(lastItem is TextContentItem) {
-                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}")
+                                                if(element.text().isNotEmpty())
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}$lineSeparator").apply {
+                                                        setSpan(StyleSpan(Typeface.BOLD), lastIndexOf(element.text()), length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
                                             } else
                                                 add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
                                             add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
                                         }
-
                                     "em" ->
                                         try {
                                             val lastItem = last()
 
-
                                             if(lastItem is TextContentItem) {
-                                                if(element.text().isNotEmpty() && element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.length))
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}")
+                                                if(element.text().isNotEmpty())
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("${element.text()}$lineSeparator").apply {
+                                                        setSpan(StyleSpan(Typeface.ITALIC), lastIndexOf(element.text()), length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
                                             } else
                                                 add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         } catch(thr: Throwable) {
