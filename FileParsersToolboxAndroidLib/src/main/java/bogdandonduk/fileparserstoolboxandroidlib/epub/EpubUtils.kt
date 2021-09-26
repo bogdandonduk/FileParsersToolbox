@@ -147,7 +147,9 @@ object EpubUtils {
 
                                             if(lastItem is TextContentItem) {
                                                 if(element.text().isNotEmpty())
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("${element.text()}$lineSeparator")
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("${element.text()}$lineSeparator").apply {
+                                                        setSpan(StyleSpan(Typeface.NORMAL), lastIndexOf(element.text()), length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                                                    }
                                             } else
                                                 add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
                                         } catch(thr: Throwable) {
