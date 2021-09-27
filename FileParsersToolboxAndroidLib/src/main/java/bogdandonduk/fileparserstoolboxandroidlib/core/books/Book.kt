@@ -17,4 +17,6 @@ class Book(var title: TitleTextContentItem?, var coverImage: ImageContentItem?, 
             }
         }
     }
+
+    var checked = false
 }
