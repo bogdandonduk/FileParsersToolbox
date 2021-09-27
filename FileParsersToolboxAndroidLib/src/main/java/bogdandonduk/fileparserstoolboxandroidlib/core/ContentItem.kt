@@ -1,3 +1,5 @@
 package bogdandonduk.fileparserstoolboxandroidlib.core
 
-abstract class ContentItem
+abstract class ContentItem {
+    var checked = false
+}
