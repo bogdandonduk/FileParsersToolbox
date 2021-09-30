@@ -167,7 +167,7 @@ object Fb2Utils {
             }
         }
 
-        if(title != null && coverImage != null && tocTitles != null && contents.isNotEmpty())
+        if(title != null && tocTitles != null && contents.isNotEmpty())
             Book(
                 TitleTextContentItem(title, isBookTitle = true),
                 ImageContentItem(coverImage!!, true),
