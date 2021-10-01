@@ -5,6 +5,7 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.StyleSpan
 import android.util.Base64
+import android.util.Log
 import bogdandonduk.fileparserstoolboxandroidlib.core.ContentItem
 import bogdandonduk.fileparserstoolboxandroidlib.core.ImageContentItem
 import bogdandonduk.fileparserstoolboxandroidlib.core.TextContentItem
@@ -252,6 +253,11 @@ object Fb2Utils {
                 }
             }
         }
+
+        Log.d("TAG", "getValidFb2: $path")
+        Log.d("TAG", "getValidFb2: $title")
+        Log.d("TAG", "getValidFb2: $tocTitles")
+        Log.d("TAG", "getValidFb2: $contents")
 
         if(title != null && tocTitles != null && contents.isNotEmpty())
             Book(
