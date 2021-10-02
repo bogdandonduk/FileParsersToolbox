@@ -191,7 +191,7 @@ object Fb2Utils {
 
         val contents = mutableListOf<ContentItem>().apply {
             val document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(File(path))
-
+                                 
             title = document.getElementsByTagName("book-title").item(0).textContent
 
             Log.d("TAG", "getValidFb2 TITLE: $title")
@@ -263,6 +263,8 @@ object Fb2Utils {
 
             Log.d("TAG", "getValidFb2 SECTIONS: $coverImage")
         }
+
+        Log.d("TAG", "getValidFb2: REACHED")
 
         if(title != null && tocTitles != null && contents.isNotEmpty())
             Book(
