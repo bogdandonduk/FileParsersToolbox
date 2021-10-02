@@ -189,79 +189,79 @@ object Fb2Utils {
 
         var tocTitles: MutableList<String>? = null
 
-        val contents = mutableListOf<ContentItem>().also { contents ->
-            DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(File(path)).run {
-                title = getElementsByTagName("book-title").item(0).textContent
+        val contents = mutableListOf<ContentItem>().apply {
+            val document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(File(path))
 
-                Log.d("TAG", "getValidFb2 TITLE: $title")
+            title = document.getElementsByTagName("book-title").item(0).textContent
 
-                getElementsByTagName("coverpage").item(0).childNodes.item(0).attributes.item(0).textContent.let { coverImageName ->
-                    getElementsByTagName("binary").let {
-                        for(i in 0 until it.length) {
-                            it.item(i).attributes.let { attributes ->
-                                for(j in 0 until attributes.length) {
-                                    attributes.item(j).textContent.let { attributeText ->
-                                        if(attributeText.contains(coverImageName) || coverImageName.contains(attributeText))
-                                            coverImage = Base64.decode(it.item(i).textContent, 0)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            Log.d("TAG", "getValidFb2 TITLE: $title")
 
-                Log.d("TAG", "getValidFb2 COVER: $coverImage")
-
-                mutableListOf<String>().let { tocTitlesList ->
-                    getElementsByTagName("section").run {
-                        for(i in 0 until length) {
-                            item(i).childNodes.let {
-                                for(j in 0 until it.length) {
-                                    it.item(j).let { node ->
-                                        if(node.nodeName.equals("title", true))
-                                            tocTitlesList.add(node.textContent)
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    if(tocTitlesList.isNotEmpty())
-                        tocTitles = tocTitlesList
-                }
-
-                Log.d("TAG", "getValidFb2 TOCTITLES: $coverImage")
-
-                if(coverImageInlinedIntoContents && coverImage != null)
-                    contents.add((ImageContentItem(coverImage!!, true)))
-
-                if(titleInlinedIntoContents && title != null)
-                    contents.add(TitleTextContentItem(title, isBookTitle = true))
-
-                getElementsByTagName("section").let {
+            document.getElementsByTagName("coverpage").item(0).childNodes.item(0).attributes.item(0).textContent.let { coverImageName ->
+                document.getElementsByTagName("binary").let {
                     for(i in 0 until it.length) {
-                        it.item(i).childNodes.let { sectionContents ->
-                            for(j in 0 until sectionContents.length) {
-                                val node = sectionContents.item(j)
+                        it.item(i).attributes.let { attributes ->
+                            for(j in 0 until attributes.length) {
+                                attributes.item(j).textContent.let { attributeText ->
+                                    if(attributeText.contains(coverImageName) || coverImageName.contains(attributeText))
+                                        coverImage = Base64.decode(it.item(i).textContent, 0)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
-                                when(node.nodeName.lowercase()) {
-                                    "p" ->
-                                        if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
-                                            contents.add(TextContentItem(node.textContent))
-                                    "title" ->
-                                        if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
-                                            contents.add(TitleTextContentItem(node.textContent, isChapterTitle = true))
-                                    "epigraph", "cite" ->
-                                        if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
-                                            contents.add(TextContentItem(node.textContent, style = Typeface.ITALIC))
+            Log.d("TAG", "getValidFb2 COVER: $coverImage")
+
+            mutableListOf<String>().let { tocTitlesList ->
+                document.getElementsByTagName("section").run {
+                    for(i in 0 until length) {
+                        item(i).childNodes.let {
+                            for(j in 0 until it.length) {
+                                it.item(j).let { node ->
+                                    if(node.nodeName.equals("title", true))
+                                        tocTitlesList.add(node.textContent)
                                 }
                             }
                         }
                     }
                 }
 
-                Log.d("TAG", "getValidFb2 SECTIONS: $coverImage")
+                if(tocTitlesList.isNotEmpty())
+                    tocTitles = tocTitlesList
             }
+
+            Log.d("TAG", "getValidFb2 TOCTITLES: $coverImage")
+
+            if(coverImageInlinedIntoContents && coverImage != null)
+                add((ImageContentItem(coverImage!!, true)))
+
+            if(titleInlinedIntoContents && title != null)
+                add(TitleTextContentItem(title, isBookTitle = true))
+
+            document.getElementsByTagName("section").let {
+                for(i in 0 until it.length) {
+                    it.item(i).childNodes.let { sectionContents ->
+                        for(j in 0 until sectionContents.length) {
+                            val node = sectionContents.item(j)
+
+                            when(node.nodeName.lowercase()) {
+                                "p" ->
+                                    if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
+                                        add(TextContentItem(node.textContent))
+                                "title" ->
+                                    if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
+                                        add(TitleTextContentItem(node.textContent, isChapterTitle = true))
+                                "epigraph", "cite" ->
+                                    if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
+                                        add(TextContentItem(node.textContent, style = Typeface.ITALIC))
+                            }
+                        }
+                    }
+                }
+            }
+
+            Log.d("TAG", "getValidFb2 SECTIONS: $coverImage")
         }
 
         if(title != null && tocTitles != null && contents.isNotEmpty())
