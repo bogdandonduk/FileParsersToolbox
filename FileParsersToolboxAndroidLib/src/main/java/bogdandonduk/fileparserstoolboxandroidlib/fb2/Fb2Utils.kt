@@ -181,15 +181,19 @@ object Fb2Utils {
     }
 
     fun getValidFb2(path: String, titleInlinedIntoContents: Boolean = false, coverImageInlinedIntoContents: Boolean = false) = try {
+        Log.d("TAG", "getValidFb2 PATH: $path")
+
         val title: String?
 
         var coverImage: ByteArray? = null
 
         var tocTitles: MutableList<String>? = null
 
-        val contents = mutableListOf<ContentItem>().apply {
+        val contents = mutableListOf<ContentItem>().also { contents ->
             DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(File(path)).run {
                 title = getElementsByTagName("book-title").item(0).textContent
+
+                Log.d("TAG", "getValidFb2 TITLE: $title")
 
                 getElementsByTagName("coverpage").item(0).childNodes.item(0).attributes.item(0).textContent.let { coverImageName ->
                     getElementsByTagName("binary").let {
@@ -205,6 +209,8 @@ object Fb2Utils {
                         }
                     }
                 }
+
+                Log.d("TAG", "getValidFb2 COVER: $coverImage")
 
                 mutableListOf<String>().let { tocTitlesList ->
                     getElementsByTagName("section").run {
@@ -224,11 +230,13 @@ object Fb2Utils {
                         tocTitles = tocTitlesList
                 }
 
+                Log.d("TAG", "getValidFb2 TOCTITLES: $coverImage")
+
                 if(coverImageInlinedIntoContents && coverImage != null)
-                    add((ImageContentItem(coverImage!!, true)))
+                    contents.add((ImageContentItem(coverImage!!, true)))
 
                 if(titleInlinedIntoContents && title != null)
-                    add(TitleTextContentItem(title, isBookTitle = true))
+                    contents.add(TitleTextContentItem(title, isBookTitle = true))
 
                 getElementsByTagName("section").let {
                     for(i in 0 until it.length) {
@@ -239,25 +247,22 @@ object Fb2Utils {
                                 when(node.nodeName.lowercase()) {
                                     "p" ->
                                         if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
-                                            add(TextContentItem(node.textContent))
+                                            contents.add(TextContentItem(node.textContent))
                                     "title" ->
                                         if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
-                                            add(TitleTextContentItem(node.textContent, isChapterTitle = true))
+                                            contents.add(TitleTextContentItem(node.textContent, isChapterTitle = true))
                                     "epigraph", "cite" ->
                                         if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
-                                            add(TextContentItem(node.textContent, style = Typeface.ITALIC))
+                                            contents.add(TextContentItem(node.textContent, style = Typeface.ITALIC))
                                 }
                             }
                         }
                     }
                 }
+
+                Log.d("TAG", "getValidFb2 SECTIONS: $coverImage")
             }
         }
-
-        Log.d("TAG", "getValidFb2: $path")
-        Log.d("TAG", "getValidFb2: $title")
-        Log.d("TAG", "getValidFb2: $tocTitles")
-        Log.d("TAG", "getValidFb2: $contents")
 
         if(title != null && tocTitles != null && contents.isNotEmpty())
             Book(
