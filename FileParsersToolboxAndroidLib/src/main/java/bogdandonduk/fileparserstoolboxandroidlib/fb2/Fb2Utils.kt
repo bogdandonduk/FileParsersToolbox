@@ -261,7 +261,7 @@ object Fb2Utils {
                 }
             }
 
-            Log.d("TAG", "getValidFb2 SECTIONS: $coverImage")
+            Log.d("TAG", "getValidFb2 SECTIONS: $this")
         }
 
         Log.d("TAG", "getValidFb2: REACHED")
@@ -275,6 +275,8 @@ object Fb2Utils {
             )
         else null
     } catch(thr: Throwable) {
+        Log.d("TAG", "getValidFb2 THROWABLE: ${thr.message}")
+        thr.printStackTrace()
         null
     }
 }
