@@ -234,10 +234,14 @@ object Fb2Utils {
             Log.d("TAG", "getValidFb2 TOCTITLES: $coverImage")
 
             if(coverImageInlinedIntoContents && coverImage != null)
-                add((ImageContentItem(coverImage!!, true)))
+                add((ImageContentItem(coverImage!!, true))).run {
+                    Log.d("TAG", "getValidFb2 TITLE ADDED: $this")
+                }
 
             if(titleInlinedIntoContents && title != null)
-                add(TitleTextContentItem(title, isBookTitle = true))
+                add(TitleTextContentItem(title, isBookTitle = true)).run {
+                    Log.d("TAG", "getValidFb2 COVERIMAGE ADDED: $this")
+                }
 
             document.getElementsByTagName("section").let {
                 for(i in 0 until it.length) {
@@ -247,14 +251,26 @@ object Fb2Utils {
 
                             when(node.nodeName.lowercase()) {
                                 "p" ->
-                                    if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
+                                    try {
+                                        if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
+                                            add(TextContentItem(node.textContent))
+                                    } catch (thr: Throwable) {
                                         add(TextContentItem(node.textContent))
+                                    }
                                 "title" ->
-                                    if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
+                                    try {
+                                        if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
+                                            add(TitleTextContentItem(node.textContent, isChapterTitle = true))
+                                    } catch (thr: Throwable) {
                                         add(TitleTextContentItem(node.textContent, isChapterTitle = true))
+                                    }
                                 "epigraph", "cite" ->
-                                    if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
+                                    try {
+                                        if(node.textContent.isNotEmpty() && (last() !is TextContentItem || node.textContent != (last() as TextContentItem).text))
+                                            add(TextContentItem(node.textContent, style = Typeface.ITALIC))
+                                    } catch (thr: Throwable) {
                                         add(TextContentItem(node.textContent, style = Typeface.ITALIC))
+                                    }
                             }
                         }
                     }
