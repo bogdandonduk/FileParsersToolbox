@@ -99,82 +99,6 @@ object EpubUtils {
         return null
     }
 
-    fun parseToChapterBook(path: String, titleInlinedIntoContents: Boolean = false, coverImageInlinedIntoContents: Boolean = false) : Book? {
-        getValidEpub(path)?.run {
-            val book = EpubReader().readEpub(File(path).inputStream())
-
-            val tocTitles = mutableListOf<String>().apply {
-                book.tableOfContents.tocReferences.forEach {
-                    add(it.title)
-                }
-            }
-
-            val title = if(book.title != null)
-                TitleTextContentItem(book.title, TitleTextLevel.H1, true, tocTitles.contains(book.title))
-            else null
-
-            val coverImage = if(book.coverImage != null && book.coverImage!!.data != null)
-                ImageContentItem(book.coverImage.data, true)
-            else null
-
-            val toc = book.tableOfContents.tocReferences
-
-            return Book(
-                title,
-                coverImage,
-                if(toc.isNotEmpty())
-                    mutableListOf<String>().apply {
-                        toc.forEach {
-                            it.title?.let { title ->
-                                add(title)
-                            }
-                        }
-                    }
-                else
-                    null,
-                if(book.contents.isNotEmpty())
-                    mutableListOf<ContentItem>().apply {
-                        if(coverImageInlinedIntoContents && coverImage != null)
-                            add(coverImage as ContentItem)
-
-                        if(titleInlinedIntoContents && title != null)
-                            add(title as ContentItem)
-
-                        book.contents.forEach {
-                            Jsoup.parse(it.reader.readText()).body().allElements.forEach { element ->
-                                when(element.tagName().lowercase()) {
-                                    "h1" -> if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
-                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H1, isChapterTitle = tocTitles.contains(element.text())))
-                                    "h2" -> if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
-                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H2, isChapterTitle = tocTitles.contains(element.text())))
-                                    "h3" -> if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
-                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H3, isChapterTitle = tocTitles.contains(element.text())))
-                                    "h4" -> if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
-                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H4, isChapterTitle = tocTitles.contains(element.text())))
-                                    "h5" -> if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
-                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H5, isChapterTitle = tocTitles.contains(element.text())))
-                                    "h6" -> if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
-                                        add(TitleTextContentItem(element.text(), TitleTextLevel.H6, isChapterTitle = tocTitles.contains(element.text())))
-
-                                    "em" -> if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
-                                        add(TextContentItem(element.text(), 18, Typeface.ITALIC))
-
-                                    "p" -> if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
-                                        add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
-                                }
-                            }
-                        }
-                    }
-                else null
-            ).apply {
-                titleInlined = titleInlinedIntoContents
-                coverImageInlined = coverImageInlinedIntoContents
-            }
-        }
-
-        return null
-    }
-
     fun parseAndMerge(path: String, titleInlinedIntoContents: Boolean = false, coverImageInlinedIntoContents: Boolean = false) : Book? {
         getValidEpub(path)?.run {
             val book = EpubReader().readEpub(File(path).inputStream())
@@ -245,7 +169,7 @@ object EpubUtils {
                                                 if(element.text().isNotEmpty()
                                                     && (lastItem.text.length < element.text().length || element.text() != lastItem.text.substring(lastItem.text.length - element.text().length, lastItem.text.lastIndex))
                                                 )
-                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator${element.text()}$lineSeparator").apply {
+                                                    lastItem.text = SpannableStringBuilder(lastItem.text).append("$lineSeparator$lineSeparator${element.text()}$lineSeparator$lineSeparator").apply {
                                                         setSpan(StyleSpan(Typeface.BOLD), lastIndexOf(element.text()), length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                     }
                                             } else
