@@ -126,10 +126,10 @@ object Fb2Utils {
                                                     if(node.textContent.isNotEmpty() && node.textContent != lastItem.text.substring(lastItem.text.length - node.textContent.length, lastItem.text.length))
                                                         lastItem.text = SpannableStringBuilder(lastItem.text).append("${node.textContent}$lineSeparator")
                                                     else
-                                                        add(TextContentItem(node.textContent))
+                                                        add(TextContentItem("$lineSeparator${node.textContent}$lineSeparator"))
                                             }
                                         } catch(thr: Throwable) {
-                                            add(TextContentItem(node.textContent))
+                                            add(TextContentItem("${node.textContent}$lineSeparator"))
                                         }
 
                                     "title" ->
@@ -141,10 +141,10 @@ object Fb2Utils {
                                                             setSpan(StyleSpan(Typeface.BOLD), length - node.textContent.length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                         }
                                                     else
-                                                        add(TitleTextContentItem(node.textContent, isChapterTitle = true))
+                                                        add(TitleTextContentItem("$lineSeparator${node.textContent}$lineSeparator$lineSeparator", isChapterTitle = true))
                                             }
                                         } catch(thr: Throwable) {
-                                            add(TitleTextContentItem(node.textContent, isChapterTitle = true))
+                                            add(TitleTextContentItem("${node.textContent}$lineSeparator$lineSeparator", isChapterTitle = true))
                                         }
 
                                     "epigraph", "cite" ->
@@ -156,10 +156,10 @@ object Fb2Utils {
                                                             setSpan(StyleSpan(Typeface.ITALIC), length - node.textContent.length, length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
                                                         }
                                                     else
-                                                        add(TextContentItem(node.textContent, style = Typeface.ITALIC))
+                                                        add(TextContentItem("$lineSeparator${node.textContent}$lineSeparator$lineSeparator", style = Typeface.ITALIC))
                                             }
                                         } catch(thr: Throwable) {
-                                            add(TextContentItem(node.textContent, style = Typeface.ITALIC))
+                                            add(TextContentItem("${node.textContent}$lineSeparator$lineSeparator", style = Typeface.ITALIC))
                                         }
                                 }
                             }
