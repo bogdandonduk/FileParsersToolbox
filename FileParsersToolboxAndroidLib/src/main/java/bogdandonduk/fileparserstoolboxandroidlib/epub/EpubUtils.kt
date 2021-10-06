@@ -4,6 +4,7 @@ import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.StyleSpan
+import android.util.Log
 import bogdandonduk.fileparserstoolboxandroidlib.core.*
 import bogdandonduk.fileparserstoolboxandroidlib.core.books.Book
 import nl.siegmann.epublib.domain.Book as EpubLibBook
@@ -188,9 +189,11 @@ object EpubUtils {
                         val lineSeparator = System.getProperty("line.separator") ?: "\r\n"
 
                         book.contents.forEach {
+                            Log.d("TAG", "parseAndMerge: ${it.reader.readText()}}")
+
                             Jsoup.parse(it.reader.readText()).body().allElements.forEach { element ->
                                 when(element.tagName().lowercase()) {
-                                    "p" ->
+                                    "p", "br" ->
                                         try {
                                             val lastItem = last()
 
