@@ -124,7 +124,7 @@ object EpubUtils {
                                             add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         }
 
-                                    "p" ->
+                                    "p, br" ->
                                         try {
                                             if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
                                                 add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
@@ -189,10 +189,8 @@ object EpubUtils {
                         val lineSeparator = System.getProperty("line.separator") ?: "\r\n"
 
                         book.contents.forEach {
-                            Log.d("TAG", "parseAndMerge: ${it.reader.readText()}}")
-
                             Jsoup.parse(it.reader.readText()).body().allElements.forEach { element ->
-                                when(element.tagName().lowercase()) {
+                                when(element.tagName().trim(' ').lowercase()) {
                                     "p", "br" ->
                                         try {
                                             val lastItem = last()

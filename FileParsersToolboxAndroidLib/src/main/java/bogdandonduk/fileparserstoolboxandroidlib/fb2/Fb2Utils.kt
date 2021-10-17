@@ -118,8 +118,8 @@ object Fb2Utils {
                             for(j in 0 until sectionContents.length) {
                                 val node = sectionContents.item(j)
 
-                                when(node.nodeName.lowercase()) {
-                                    "p" ->
+                                when(node.nodeName.trim().lowercase()) {
+                                    "p", "br" ->
                                         try {
                                             last().let { lastItem ->
                                                 if(lastItem is TextContentItem)
