@@ -9,14 +9,14 @@ class Book(var title: TitleTextContentItem?, var coverImage: ImageContentItem?, 
     var titleInlined = false
     var coverImageInlined = false
 
-    var indexedTableOfContentsTitles = mutableMapOf<String, Int>().apply {
-        contents?.forEachIndexed { i: Int, contentItem: ContentItem ->
-            (contentItem as? TextContentItem)?.text?.toString()?.let { text ->
-                if(!containsKey(text) && contentItem.isChapterTitle)
-                    this[text] = i
-            }
-        }
-    }
+//    var indexedTableOfContentsTitles = mutableMapOf<String, Int>().apply {
+//        contents?.forEachIndexed { i: Int, contentItem: ContentItem ->
+//            (contentItem as? TextContentItem)?.text?.toString()?.let { text ->
+//                if(!containsKey(text) && contentItem.isChapterTitle)
+//                    this[text] = i
+//            }
+//        }
+//    }
 
     var checked = false
 }
