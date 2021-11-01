@@ -124,7 +124,7 @@ object EpubUtils {
                                             add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         }
 
-                                    "p, br" ->
+                                    "p", "br" ->
                                         try {
                                             if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
                                                 add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
