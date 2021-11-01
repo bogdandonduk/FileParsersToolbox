@@ -177,6 +177,7 @@ object EpubUtils {
 
                     book.contents.forEach {
                         Jsoup.parse(it.reader.readText()).body().allElements.forEach { element ->
+                            Log.d("TAG", "parseAndMerge: ${element.tagName()} | ${element.ownText()}")
                             when(element.tagName().trim(' ').lowercase()) {
                                 "p", "br" ->
                                     try {
