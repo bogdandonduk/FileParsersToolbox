@@ -119,7 +119,7 @@ object Fb2Utils {
                                 val node = sectionContents.item(j)
 
                                 when(node.nodeName.trim().lowercase()) {
-                                    "p" ->
+                                    "p", "br", "td", "span", "a", "div" ->
                                         try {
                                             last().let { lastItem ->
                                                 if(lastItem is TextContentItem)

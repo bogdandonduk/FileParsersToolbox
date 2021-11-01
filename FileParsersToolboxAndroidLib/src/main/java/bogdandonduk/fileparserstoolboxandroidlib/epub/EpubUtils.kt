@@ -124,7 +124,7 @@ object EpubUtils {
                                             add(TextContentItem(element.text(), 18, Typeface.ITALIC))
                                         }
 
-                                    "p", "br" ->
+                                    "p", "br", "td", "span", "a", "div" ->
                                         try {
                                             if(element.text().isNotEmpty() && (last() !is TextContentItem || element.text() != (last() as TextContentItem).text))
                                                 add(TextContentItem(element.text(), isChapterTitle = tocTitles.contains(element.text())))
@@ -179,7 +179,7 @@ object EpubUtils {
                         Jsoup.parse(it.reader.readText()).body().allElements.forEach { element ->
                             Log.d("TAG", "parseAndMerge: ${element.tagName()} | ${element.ownText()}")
                             when(element.tagName().trim(' ').lowercase()) {
-                                "p", "br" ->
+                                "p", "br", "td", "span", "a", "div" ->
                                     try {
                                         val lastItem = last()
 
